@@ -10,7 +10,7 @@ describe FannyPack::Request do
     @req = FannyPack::Request.new
   end
 
-  describe "::new" do
+  describe "#initialize" do
     %w[response params].each do |test|
       it "sets @#{test} to a hash" do
         @req.instance_variable_get("@#{test}").should be_a Hash
