@@ -12,7 +12,7 @@ describe FannyPack::IP do
       FannyPack::IP::IP_TYPES[:normal].should == 1
     end
 
-    it "has a key of 2 for :vps" do
+    it "has a value of 2 for :vps" do
       FannyPack::IP::IP_TYPES[:vps].should == 2
     end
 
