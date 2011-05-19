@@ -13,9 +13,15 @@ describe FannyPack::Request do
     end
   end
 
-  describe "#new" do
-    it "sets the request @params hash" do
-      @req.params.should respond_to :keys
+  describe "#to_xml" do
+    it "builds a SOAP envelope" do
+      @req.commit :list, :type => '1'
+      xml = @req.to_xml
+      xml.should include
+        %{<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">\n  <env:Body>}
+      xml.should include
+        %{</env:Body>\n</env:Envelope>}
+      xml.should match %r{<accountHASH>.*</accountHASH>}
     end
   end
 
