@@ -21,7 +21,7 @@ describe FannyPack::IP do
     it "is immutable" do
       expect {
         FannyPack::IP::IP_TYPES[:foo] = 1
-      }.to raise_error
+      }.to raise_error /can't modify frozen hash/
     end
   end
 
