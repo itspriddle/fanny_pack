@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:xmethods-delayed-quotes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/xml-soap" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<SOAP-ENV:Body>
+<ns1:getIpDetailsResponse>
+<Result xsi:type="ns2:Map">
+  <item><key xsi:type="xsd:string">ipAddress</key><value xsi:type="xsd:string">127.0.0.1</value></item>
+  <item><key xsi:type="xsd:string">addedOn</key><value xsi:type="xsd:string">2010-06-10 17:05:31</value></item>
+  <item><key xsi:type="xsd:string">isVPS</key><value xsi:type="xsd:string">No</value></item>
+  <item><key xsi:type="xsd:string">status</key><value xsi:type="xsd:string">Active</value></item>
+</Result>
+</ns1:getIpDetailsResponse>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
