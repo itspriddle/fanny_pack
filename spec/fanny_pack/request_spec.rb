@@ -55,7 +55,7 @@ describe FannyPack::Request do
     end
 
     it "parses XML to set the @response hash" do
-      @res.should respond_to :keys
+      @res.should be_a Hash
     end
 
     it "sets @success if no error"

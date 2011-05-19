@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe FannyPack::IP do
   describe "::IP_TYPES" do
-    it "is a Hash" do
-      FannyPack::IP::IP_TYPES.should respond_to :keys
-    end
+    it { FannyPack::IP::IP_TYPES.should be_a Hash }
 
     it "has a value of 0 for :all" do
       FannyPack::IP::IP_TYPES[:all].should == 0
@@ -18,9 +16,7 @@ describe FannyPack::IP do
       FannyPack::IP::IP_TYPES[:vps].should == 2
     end
 
-    it "is immutable" do
-      FannyPack::IP::IP_TYPES.should be_frozen
-    end
+    it { FannyPack::IP::IP_TYPES.should be_frozen }
   end
 
   describe "::add" do
@@ -37,7 +33,7 @@ describe FannyPack::IP do
     it "returns a Hash", :pending => true do
       load_response :add
       ip = FannyPack::IP.add '127.0.0.1'
-      ip.should respond_to :keys
+      ip.should be_a Hash
     end
   end
 end
