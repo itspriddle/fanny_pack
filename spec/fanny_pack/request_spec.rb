@@ -13,7 +13,7 @@ describe FannyPack::Request do
   describe "::new" do
     %w[response params].each do |test|
       it "sets @#{test} to a hash" do
-        @req.instance_variable_get("@#{test}").should respond_to :keys
+        @req.instance_variable_get("@#{test}").should be_a Hash
       end
     end
   end
