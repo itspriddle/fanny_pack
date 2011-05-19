@@ -30,8 +30,8 @@ describe FannyPack::IP do
       }.to_not raise_error(ArgumentError)
     end
 
-    it "returns a Hash", :pending => true do
-      load_response :add
+    it "returns a Hash" do
+      load_fixture :add
       ip = FannyPack::IP.add '127.0.0.1'
       ip.should be_a Hash
     end

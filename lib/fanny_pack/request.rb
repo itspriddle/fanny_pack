@@ -30,11 +30,6 @@ module FannyPack
       http.use_ssl = true
       res = http.post(uri.path, to_xml, 'Content-Type' => 'text/xml; charset=utf-8')
       parse(res.body)
-      success?
-    end
-
-    def success?
-
     end
 
     def parse(data)

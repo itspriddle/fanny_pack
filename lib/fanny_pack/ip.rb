@@ -8,7 +8,8 @@ module FannyPack
     }.freeze
 
     def self.add(ip, ip_type = :normal)
-      Request.run :add, :ip => ip, :type => :normal
+      Request.new.commit :addIp, :ip => ip, :type => IP_TYPES[ip_type]
+    end
     end
 
   end

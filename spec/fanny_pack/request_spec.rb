@@ -42,10 +42,10 @@ describe FannyPack::Request do
       expect { @req.commit :HammerTime }.to raise_error
     end
 
-    it "returns #success?" do
+    it "returns a Hash" do
       load_fixture :list
       res = @req.commit :getIpList, :type => 1
-      res.should == @req.success?
+      res.should be_a Hash
     end
   end
 
