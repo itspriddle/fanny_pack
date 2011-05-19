@@ -36,7 +36,7 @@ describe FannyPack::IP do
       }.to_not raise_error(ArgumentError)
     end
 
-    it "returns a Hash" do
+    it "returns a Hash", :pending => true do
       load_response :add
       ip = FannyPack::IP.add '127.0.0.1'
       ip.should respond_to :keys
