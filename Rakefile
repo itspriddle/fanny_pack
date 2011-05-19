@@ -23,8 +23,7 @@ task :console do
   sh "irb -rubygems -r ./lib/fanny_pack.rb -I ./lib"
 end
 
-require 'sdoc_helpers'
-desc "Push a new version to Gemcutter"
+desc "Push a new version to RubyGems"
 task :publish do
   require 'fanny_pack/version'
 
@@ -35,8 +34,6 @@ task :publish do
   sh "git tag -a -m 'FannyPack v#{ver}' v#{ver}"
   sh "git push origin v#{ver}"
   sh "git push origin master"
-  sh "git clean -fd"
-  sh "rake pages"
 end
 
 desc  "Run all specs with rcov"
