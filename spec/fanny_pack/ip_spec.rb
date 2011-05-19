@@ -21,7 +21,7 @@ describe FannyPack::IP do
     it "is immutable" do
       expect {
         FannyPack::IP::IP_TYPES[:foo] = 1
-      }.to raise_error(TypeError)
+      }.to raise_error
     end
   end
 
