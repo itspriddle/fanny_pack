@@ -38,23 +38,31 @@ describe FannyPack::Request do
   end
 
   describe "#commit" do
-    before :each do
-      @req.commit :getIpList, :type => 1
-    end
-
     it "raises exception unless action is valid" do
       expect { @req.commit :HammerTime }.to raise_error
     end
 
-    it "sets the request @params hash" do
-      @req.params.should respond_to :keys
+    it "returns #success?" do
+      load_fixture :list
+      res = @req.commit :getIpList, :type => 1
+      res.should == @req.success?
+    end
+  end
+
+  describe "#parse" do
+    before :each do
+      @res = @req.parse load_fixture :add
     end
 
-    it "sets the @response hash", :pending => true do
-      @req.commit.should respond_to :keys
+    it "parses XML to set the @response hash" do
+      @res.should respond_to :keys
     end
 
     it "sets @success if no error"
+  end
+
+  describe "#success?" do
+    it "returns true or false based on @success"
   end
 
 end

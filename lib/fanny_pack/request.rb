@@ -1,4 +1,5 @@
 require 'builder'
+require 'crack'
 
 module FannyPack
   class Request
@@ -9,7 +10,7 @@ module FannyPack
       :editIp, :deactivateIp, :reactivateIp, :deleteIp
     ].freeze
 
-    URL = "https://netenberg.com/api/"
+    API_URL = "https://netenberg.com/api/"
 
     def initialize
       @action   = :invalid
@@ -23,6 +24,21 @@ module FannyPack
       end
       @action = action
       @params = params
+
+      uri = URI.parse(API_URL)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      res = http.post(uri.path, to_xml, 'Content-Type' => 'text/xml; charset=utf-8')
+      parse(res.body)
+      success?
+    end
+
+    def success?
+
+    end
+
+    def parse(data)
+      xml = Crack::XML.parse(data)
     end
 
     def to_xml
