@@ -16,10 +16,10 @@ Gem::Specification.new do |s|
   s.files           += Dir['spec/**/*']
 
   s.add_runtime_dependency 'builder'
+  s.add_runtime_dependency 'crack'
 
   s.add_development_dependency 'rspec',           '~> 2.6.0'
   s.add_development_dependency 'fakeweb',         '~> 1.3.0'
-  s.add_development_dependency 'fakeweb-matcher', '~> 1.2.2'
   s.add_development_dependency 'awesome_print'
 
   if ! defined?(RUBY_ENGINE) || RUBY_ENGINE != 'rbx'

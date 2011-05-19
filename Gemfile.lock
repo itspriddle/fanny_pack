@@ -3,15 +3,15 @@ PATH
   specs:
     fanny_pack (0.0.0)
       builder
+      crack
 
 GEM
   remote: http://rubygems.org/
   specs:
     Saikuro (1.1.0)
-    abstract (1.0.0)
-    activesupport (3.0.6)
+    activesupport (3.0.7)
     arrayfields (4.7.4)
-    awesome_print (0.3.2)
+    awesome_print (0.4.0)
     builder (3.0.0)
     chronic (0.3.0)
     churn (0.0.13)
@@ -22,13 +22,10 @@ GEM
       ruby_parser (~> 2.0.4)
       sexp_processor (~> 3.0.3)
     colored (1.2)
+    crack (0.1.8)
     diff-lcs (1.1.2)
-    erubis (2.6.6)
-      abstract (>= 1.0.0)
+    erubis (2.7.0)
     fakeweb (1.3.0)
-    fakeweb-matcher (1.2.2)
-      fakeweb (>= 1.2.5)
-      rspec (>= 1.2.0)
     fattr (2.2.0)
     flay (1.4.2)
       ruby_parser (~> 2.0)
@@ -36,8 +33,8 @@ GEM
     flog (2.5.1)
       ruby_parser (~> 2.0)
       sexp_processor (~> 3.0)
-    haml (3.0.25)
-    hirb (0.4.3)
+    haml (3.1.1)
+    hirb (0.4.5)
     i18n (0.5.0)
     json_pure (1.5.1)
     main (4.4.0)
@@ -55,14 +52,14 @@ GEM
       reek (>= 1.2.6)
       roodi (>= 2.1.0)
       syntax
-    rails_best_practices (0.7.5)
+    rails_best_practices (0.9.0)
       activesupport
-      colored (~> 1.2)
-      erubis (~> 2.6.6)
-      haml (~> 3.0.18)
+      colored
+      erubis
+      haml
       i18n
-      ruby-progressbar (~> 0.0.9)
-      ruby_parser (~> 2.0.4)
+      ruby-progressbar
+      ruby_parser
     rcov (0.9.9)
     reek (1.2.8)
       ruby2ruby (~> 1.2)
@@ -74,11 +71,11 @@ GEM
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
       rspec-mocks (~> 2.6.0)
-    rspec-core (2.6.0)
+    rspec-core (2.6.1)
     rspec-expectations (2.6.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.6.0)
-    ruby-progressbar (0.0.9)
+    ruby-progressbar (0.0.10)
     ruby2ruby (1.2.5)
       ruby_parser (~> 2.0)
       sexp_processor (~> 3.0)
@@ -93,7 +90,6 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   fakeweb (~> 1.3.0)
-  fakeweb-matcher (~> 1.2.2)
   fanny_pack!
   metric_fu (~> 2.1)
   rcov (~> 0.9)
