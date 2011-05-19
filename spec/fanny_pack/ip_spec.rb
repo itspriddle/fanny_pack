@@ -38,8 +38,8 @@ describe FannyPack::IP do
 
     it "returns a Hash" do
       load_response :add
-      @ip = FannyPack::IP.add '127.0.0.1'
-      @ip.should respond_to :keys
+      ip = FannyPack::IP.add '127.0.0.1'
+      ip.should respond_to :keys
     end
   end
 end
