@@ -1,6 +1,6 @@
 # FannyPack
 
-FannyPack is Ruby library for working with the
+FannyPack is a Ruby library for working with the
 [Fantastico API](https://netenberg.com/api/).
 
 ## Installation
