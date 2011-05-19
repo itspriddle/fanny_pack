@@ -12,7 +12,7 @@ module FannyPack
     }.freeze
 
     class AuthRequired < StandardError
-      def initialize
+      def initialize(msg = nil)
         super "Must set FannyPack.account_hash"
       end
     end
