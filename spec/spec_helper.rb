@@ -4,8 +4,14 @@ require 'fanny_pack'
 
 FakeWeb.allow_net_connect = false
 
-def load_response(name)
+def load_fixture(name, register = true)
+  body = File.read File.expand_path("../fixtures/#{name}.txt", __FILE__)
+  register_url(body) if register
+  body
+end
+
+def register_url(body)
   FakeWeb.clean_registry
-  res = File.read File.expand_path("../fixtures/#{name}.txt", __FILE__)
-  FakeWeb.register_uri :any, "https://netenberg.com/api", :body => res
+  FakeWeb.allow_net_connect = false
+  FakeWeb.register_uri :any, FannyPack::Request::API_URL, :body => body
 end
