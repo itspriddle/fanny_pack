@@ -33,7 +33,14 @@ module FannyPack
     end
 
     def parse(data)
-      xml = Crack::XML.parse(data)
+      hash = Crack::XML.parse(data)
+      res  = find_key_in_hash(hash, 'item')
+      case @action.to_sym
+      when :editIp, :addIp
+        Hash[res.map { |r| [r['key'], r['value']] }]
+      else
+        res
+      end
     end
 
     def to_xml
@@ -50,6 +57,22 @@ module FannyPack
         end
       end
       xml.target!
+    end
+
+  private
+
+    def find_key_in_hash(hash, index)
+      hash.each do |key, val|
+        if val.respond_to? :has_key?
+          if val.has_key? index
+            return val[index]
+          else
+            return find_key_in_hash val, index
+          end
+        else
+          val
+        end
+      end
     end
 
   end
