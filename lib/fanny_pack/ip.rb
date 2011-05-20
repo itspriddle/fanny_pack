@@ -10,5 +10,33 @@ module FannyPack
     def self.add(ip, ip_type = :normal)
       Request.new.commit :addIp, :ip => ip, :type => IP_TYPES[ip_type]
     end
+
+    def self.edit(ip, new_ip)
+      Request.new.commit :editIp, :ip => ip, :new_ip => new_ip
+    end
+
+    def self.list(list_type, details = false)
+      cmd = details ? :getIpListDetailed : :getIpList
+      unless IP_TYPES.keys.include? list_type
+        raise ArgumentError, "Invalid list type"
+      end
+      Request.new.commit cmd, :listType => IP_TYPES[list_type]
+    end
+
+    def self.delete(ip)
+      Request.new.commit :deleteIp, :ip => ip
+    end
+
+    def self.reactivate(ip)
+      Request.new.commit :reactivateIp, :ip => ip
+    end
+
+    def self.deactivate(ip)
+      Request.new.commit :deactivateIp, :ip => ip
+    end
+
+    def self.details(ip)
+      Request.new.commit :getIpDetails, :ip => ip
+    end
   end
 end

@@ -1,5 +1,7 @@
 require 'builder'
 require 'crack'
+require 'open-uri'
+require 'net/https'
 
 module FannyPack
   class Request
@@ -10,7 +12,7 @@ module FannyPack
       :editIp, :deactivateIp, :reactivateIp, :deleteIp
     ].freeze
 
-    API_URL = "https://netenberg.com/api/"
+    API_URL = "https://netenberg.com/api/server.php"
 
     def initialize
       @action   = :invalid
@@ -33,7 +35,23 @@ module FannyPack
     end
 
     def parse(data)
-      xml = Crack::XML.parse(data)
+      res = find_key_in_hash(Crack::XML.parse(data), 'item')
+      if @action.to_sym == :getIpListDetailed
+        res.map! do |r|
+          Hash[r['item'].map { |i| [i['key'], i['value']] }]
+        end
+      elsif @action.to_sym == :getIpList
+        res
+      else
+        res = Hash[res.map { |r| [r['key'], r['value']] }] if res.is_a? Array
+      end
+
+      @success = ! res.has_key?("faultcode") if res.respond_to?(:has_key?)
+      res
+    end
+
+    def success?
+      @success
     end
 
     def to_xml
@@ -50,6 +68,22 @@ module FannyPack
         end
       end
       xml.target!
+    end
+
+  private
+
+    def find_key_in_hash(hash, index)
+      hash.each do |key, val|
+        if val.respond_to? :has_key?
+          if val.has_key? index
+            return val[index]
+          else
+            return find_key_in_hash val, index
+          end
+        else
+          val
+        end
+      end
     end
 
   end
