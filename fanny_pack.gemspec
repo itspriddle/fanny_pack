@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
   s.files    += Dir['lib/**/*']
   s.files    += Dir['spec/**/*']
 
-  s.add_runtime_dependency 'builder', '= 3.0.0'
-  s.add_runtime_dependency 'crack', '= 0.1.8'
+  s.add_runtime_dependency 'builder', '~> 3.0.0'
+  s.add_runtime_dependency 'crack', '~> 0.1.8'
   s.add_runtime_dependency('jruby-openssl', '~> 0.7.4') if RUBY_PLATFORM == 'java'
 
   s.add_development_dependency 'rspec', '~> 2.5.0'
