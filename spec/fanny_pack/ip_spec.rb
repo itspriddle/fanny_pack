@@ -104,4 +104,19 @@ describe FannyPack::IP do
       end
     end
   end
+
+  describe "::details" do
+    it "raises ArgumentError without IP" do
+      expect { FannyPack::IP.details }.to raise_error(ArgumentError)
+    end
+
+    it "returns a hash of IP details" do
+      load_fixture :details
+      ip = FannyPack::IP.details '127.0.0.1'
+      ip.should be_a Hash
+      %w[ipAddress addedOn isVPS status].each do |key|
+        ip.should have_key key
+      end
+    end
+  end
 end

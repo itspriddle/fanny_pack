@@ -34,5 +34,9 @@ module FannyPack
     def self.deactivate(ip)
       Request.new.commit :deactivateIp, :ip => ip
     end
+
+    def self.details(ip)
+      Request.new.commit :getIpDetails, :ip => ip
+    end
   end
 end
