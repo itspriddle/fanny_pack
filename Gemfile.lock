@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fanny_pack (0.0.0)
+    fanny_pack (0.1.0)
       builder
       crack
 
