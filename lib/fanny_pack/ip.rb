@@ -10,7 +10,5 @@ module FannyPack
     def self.add(ip, ip_type = :normal)
       Request.new.commit :addIp, :ip => ip, :type => IP_TYPES[ip_type]
     end
-    end
-
   end
 end
