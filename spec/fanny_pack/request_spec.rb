@@ -41,16 +41,11 @@ describe FannyPack::Request do
     it "raises exception unless action is valid" do
       expect { @req.commit :HammerTime }.to raise_error
     end
-
-    it "returns a Hash" do
-      load_fixture :list
-      res = @req.commit :getIpList, :type => 1
-      res.should be_a Hash
-    end
   end
 
   describe "#parse" do
     before :each do
+      @req.instance_variable_set("@action", :addIp)
       @res = @req.parse load_fixture :add
     end
 
