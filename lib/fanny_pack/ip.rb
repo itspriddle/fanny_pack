@@ -26,5 +26,9 @@ module FannyPack
     def self.delete(ip)
       Request.new.commit :deleteIp, :ip => ip
     end
+
+    def self.reactivate(ip)
+      Request.new.commit :reactivateIp, :ip => ip
+    end
   end
 end
