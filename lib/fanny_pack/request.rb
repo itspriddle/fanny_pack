@@ -1,5 +1,7 @@
 require 'builder'
 require 'crack'
+require 'open-uri'
+require 'net/https'
 
 module FannyPack
   class Request
@@ -10,7 +12,7 @@ module FannyPack
       :editIp, :deactivateIp, :reactivateIp, :deleteIp
     ].freeze
 
-    API_URL = "https://netenberg.com/api/"
+    API_URL = "https://netenberg.com/api/server.php"
 
     def initialize
       @action   = :invalid
