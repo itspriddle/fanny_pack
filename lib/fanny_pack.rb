@@ -5,8 +5,12 @@ module FannyPack
   autoload :IP,      'fanny_pack/ip'
 
   class << self
-    # FannyPack.account_hash stores your Fantastico account hash. This is used
-    # to authenticate your account with the Fantastico API.
+    # Your Fantastico account hash, used for API authentication
+    #
+    # @param [String] hash
+    #   Your Fantastico account hash
+    #
+    # @return [String]
     attr_accessor :account_hash
   end
 

@@ -11,20 +11,18 @@ module FannyPack
 
     # Add an IP address to your Fantastico account.
     #
-    # Returns a Hash containing the new IP info on success
-    # Returns a Hash containing an error code and message on error
+    # @param [String] ip
+    #   The IP address to add
     #
-    # ==== Options
+    # @param [Symbol] ip_type
+    #   The type of IP address (+:vps+ or +:normal+)
     #
-    # * +ip+ - The cPanel IP address to add
-    # * +ip_type* - The type of IP address (:vps or :normal)
+    # @return [Hash]
     #
-    # ==== Examples
-    #
-    #   # Add normal IP
+    # @example Add normal IP
     #   FannyPack::IP.add '127.0.0.1'
     #
-    #   # Add vps IP
+    # @example Add vps IP
     #   FannyPack::IP.add '127.0.0.1', :vps
     def self.add(ip, ip_type = :normal)
       Request.new.commit :addIp, :ip => ip, :type => IP_TYPES[ip_type]
@@ -32,16 +30,15 @@ module FannyPack
 
     # Edit an IP address, replacing +ip+ with +new_ip+
     #
-    # Returns a Hash containing the new IP info on success
-    # Returns a Hash containing an error code and message on error
+    # @param [String] ip
+    #   The current IP address
     #
-    # ==== Options
+    # @param [String] new_ip
+    #   The new IP address
     #
-    # * +ip+ - The current IP address
-    # * +new_ip+ - The new IP address
+    # @return [Hash]
     #
-    # ==== Example
-    #
+    # @example
     #   FannyPack::IP.edit '127.0.0.1', '127.0.0.2'
     def self.edit(ip, new_ip)
       Request.new.commit :editIp, :ip => ip, :new_ip => new_ip
@@ -50,42 +47,38 @@ module FannyPack
     # Get a list of IP addresses on your Fantastico account
     #
     # The Fantastico API allows you to filter for only normal IPs, or only
-    # vps IPs. Use +list_type+ :all to get all IPs, :normal to get only normal
-    # IPs, or :vps to get only vps IPs.
+    # vps IPs. Use +list_type+ +:all+ to get all IPs, +:normal+ to get only
+    # normal IPs, or +:vps+ to get only vps IPs.
     #
-    # Raises ArgumentError if list_type is invalid
+    # @param [Symbol] list_type
+    #   The list type, one of +:normal+, +:vps+, +:all+
     #
-    # If +details+ is false:
-    # Returns an Array containing IP addresses
+    # @param [Boolean] details
+    #   Set to true to return details for each IP
     #
-    # If +details+ is true:
-    # Returns an Array of Hashes containing info for each IP
+    # @raise [ArgumentError]
+    #   Raised if list_type is invalid
     #
-    # Returns a Hash containing an error code and message on error
+    # @return [Array]
+    #   If +details+ is false, an array of IPs as +Strings+ is returned. If
+    #   +details+ is true, an array of IPs as Hashes is returned.
     #
-    # ==== Options
-    #
-    # * +list_type+ - The list type, one of :normal, :vps, :all
-    # * +details+ - Set to true to return details for each IP
-    #
-    # ==== Examples
-    #
-    #   # Show all IPs (simple list)
+    # @example Show all IPs (simple list)
     #   FannyPack::IP.list :all
     #
-    #   # Show all IPs (detailed list)
+    # @example Show all IPs (detailed list)
     #   FannyPack::IP.list :all, true
     #
-    #   # Show normal IPs (simple list)
+    # @example Show normal IPs (simple list)
     #   FannyPack::IP.list :normal
     #
-    #   # Show normal IPs (detailed list)
+    # @example Show normal IPs (detailed list)
     #   FannyPack::IP.list :normal, true
     #
-    #   # Show vps IPs (simple list)
+    # @example Show vps IPs (simple list)
     #   FannyPack::IP.list :vps
     #
-    #   # Show normal IPs (detailed list)
+    # @example Show normal IPs (detailed list)
     #   FannyPack::IP.list :vps, true
     def self.list(list_type, details = false)
       cmd = details ? :getIpListDetailed : :getIpList
@@ -97,15 +90,12 @@ module FannyPack
 
     # Delete an IP address from your Fantastico Account
     #
-    # Returns a Hash containing the IP info
-    # Returns a Hash containing an error code and message on error
+    # @param [String] ip
+    #   The IP address to delete
     #
-    # ==== Options
+    # @return [Hash]
     #
-    # * +ip+ - The IP address to delete
-    #
-    # ==== Example
-    #
+    # @example
     #   FannyPack::IP.delete '127.0.0.1'
     def self.delete(ip)
       Request.new.commit :deleteIp, :ip => ip
@@ -113,15 +103,12 @@ module FannyPack
 
     # Reactivate a deactivated IP address
     #
-    # Returns a Hash containing the IP info
-    # Returns a Hash containing an error code and message on error
+    # @param [String] ip
+    #   The IP address to reactivate
     #
-    # ==== Options
+    # @return [Hash]
     #
-    # * +ip+ - The IP address to reactivate
-    #
-    # ==== Example
-    #
+    # @example
     #   FannyPack::IP.reactivate '127.0.0.1'
     def self.reactivate(ip)
       Request.new.commit :reactivateIp, :ip => ip
@@ -129,15 +116,12 @@ module FannyPack
 
     # Deactivate an IP address
     #
-    # Returns a Hash containing the IP info
-    # Returns a Hash containing an error code and message on error
+    # @param [String] ip
+    #   The IP address to deactivate
     #
-    # ==== Options
+    # @return [Hash]
     #
-    # * +ip+ - The IP address to deactivate
-    #
-    # ==== Example
-    #
+    # @example
     #   FannyPack::IP.deactivate '127.0.0.1'
     def self.deactivate(ip)
       Request.new.commit :deactivateIp, :ip => ip
@@ -145,15 +129,12 @@ module FannyPack
 
     # Get details for an IP address
     #
-    # Returns a Hash containing the IP info
-    # Returns a Hash containing an error code and message on error
+    # @param [String] ip
+    #    The IP address to look up
     #
-    # ==== Options
+    # @return [Hash]
     #
-    # * +ip+ - The IP address to lookup
-    #
-    # ==== Example
-    #
+    # @example
     #   FannyPack::IP.details '127.0.0.1'
     def self.details(ip)
       Request.new.commit :getIpDetails, :ip => ip

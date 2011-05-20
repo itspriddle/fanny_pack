@@ -1,5 +1,5 @@
 module FannyPack
-  module Errors #:nodoc: all
+  module Errors
     # Fault codes and error messages that are returned by the Fantastico API
     FAULT_CODES = {
       1302 => "You have specified an invalid hash.",
