@@ -46,14 +46,36 @@ describe FannyPack::Request do
   describe "#parse" do
     before :each do
       @req.instance_variable_set("@action", :addIp)
-      @res = @req.parse load_fixture :add
     end
 
-    it "parses XML to set the @response hash" do
-      @res.should be_a Hash
+    it "returns an Array of Hashes if @action == :getIpListDetailed" do
+      @req.instance_variable_set("@action", :getIpListDetailed)
+      res = @req.parse load_fixture :list_details
+      res.should be_a Array
+      res.should have(2).items
+      %w[ipAddress addedOn isVPS status].each do |key|
+        res.first.should have_key key
+      end
+    end
+
+    it "returns a flat Array if @action is :getIpList" do
+      @req.instance_variable_set("@action", :getIpList)
+      res = @req.parse load_fixture :list
+      res.should be_a Array
+      res.should have(2).items
+      res[0].should == '127.0.0.1'
+      res[1].should == '127.0.0.2'
+    end
+
+    it "returns a Hash if @action is not :getIpList or :getIpListDetailed" do
+      @req.instance_variable_set("@action", :addIp)
+      res = @req.parse load_fixture :add
+      res.should be_a Hash
     end
 
     it "sets @success" do
+      @req.instance_variable_set("@action", :addIp)
+      res = @req.parse load_fixture :add
       @req.instance_variable_get("@success").should_not be_nil
     end
   end
@@ -63,6 +85,7 @@ describe FannyPack::Request do
       @req.instance_variable_set("@action", :addIp)
       @req.parse load_fixture :add
       @req.instance_variable_get("@success").should_not be_nil
+      @req.success?.should be_true
     end
   end
 
