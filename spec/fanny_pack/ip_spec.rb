@@ -70,6 +70,9 @@ describe FannyPack::IP do
       ip.should have(2).items
       ip.each do |hash|
         hash.should be_a Hash
+        %w[ipAddress addedOn isVPS status].each do |key|
+          hash.should have_key key
+        end
       end
     end
   end

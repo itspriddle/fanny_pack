@@ -39,6 +39,11 @@ module FannyPack
       case @action.to_sym
       when :editIp, :addIp, :deleteIp, :reactivateIp, :deactivateIp, :getIpDetails
         res = Hash[res.map { |r| [r['key'], r['value']] }] if res.is_a? Array
+      when :getIpListDetailed
+        res.map! do |r|
+          Hash[r['item'].map { |i| [i['key'], i['value']] }]
+        end
+        res
       end
       @success = ! res.has_key?("faultcode") if res.respond_to?(:has_key?)
       res
