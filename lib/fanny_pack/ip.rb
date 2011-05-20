@@ -20,7 +20,7 @@ module FannyPack
       unless IP_TYPES.keys.include? list_type
         raise ArgumentError, "Invalid list type"
       end
-      Request.new.commit cmd, :listType => list_type
+      Request.new.commit cmd, :listType => IP_TYPES[list_type]
     end
 
     def self.delete(ip)
