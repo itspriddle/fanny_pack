@@ -1,5 +1,6 @@
 module FannyPack
-  module Errors
+  module Errors #:nodoc: all
+    # Fault codes and error messages that are returned by the Fantastico API
     FAULT_CODES = {
       1302 => "You have specified an invalid hash.",
       1401 => "You are trying to access the API from a server whose IP Address is not authorized.",
