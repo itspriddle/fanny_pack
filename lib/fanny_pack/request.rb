@@ -35,14 +35,17 @@ module FannyPack
     end
 
     def parse(data)
-      hash = Crack::XML.parse(data)
-      res  = find_key_in_hash(hash, 'item')
+      res = find_key_in_hash(Crack::XML.parse(data), 'item')
       case @action.to_sym
       when :editIp, :addIp, :deleteIp, :reactivateIp, :deactivateIp, :getIpDetails
-        Hash[res.map { |r| [r['key'], r['value']] }]
-      else
-        res
+        res = Hash[res.map { |r| [r['key'], r['value']] }] if res.is_a? Array
       end
+      @success = ! res.has_key?("faultcode") if res.respond_to?(:has_key?)
+      res
+    end
+
+    def success?
+      @success
     end
 
     def to_xml

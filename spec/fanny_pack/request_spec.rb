@@ -53,11 +53,17 @@ describe FannyPack::Request do
       @res.should be_a Hash
     end
 
-    it "sets @success if no error"
+    it "sets @success" do
+      @req.instance_variable_get("@success").should_not be_nil
+    end
   end
 
   describe "#success?" do
-    it "returns true or false based on @success"
+    it "returns true or false based on @success" do
+      @req.instance_variable_set("@action", :addIp)
+      @req.parse load_fixture :add
+      @req.instance_variable_get("@success").should_not be_nil
+    end
   end
 
 end
