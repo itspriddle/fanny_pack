@@ -36,15 +36,16 @@ module FannyPack
 
     def parse(data)
       res = find_key_in_hash(Crack::XML.parse(data), 'item')
-      case @action.to_sym
-      when :editIp, :addIp, :deleteIp, :reactivateIp, :deactivateIp, :getIpDetails
-        res = Hash[res.map { |r| [r['key'], r['value']] }] if res.is_a? Array
-      when :getIpListDetailed
+      if @action.to_sym == :getIpListDetailed
         res.map! do |r|
           Hash[r['item'].map { |i| [i['key'], i['value']] }]
         end
+      elsif @action.to_sym == :getIpList
         res
+      else
+        res = Hash[res.map { |r| [r['key'], r['value']] }] if res.is_a? Array
       end
+
       @success = ! res.has_key?("faultcode") if res.respond_to?(:has_key?)
       res
     end
