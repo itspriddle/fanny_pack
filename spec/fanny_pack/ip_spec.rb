@@ -42,7 +42,6 @@ describe FannyPack::IP do
       load_fixture :edit
       ip = FannyPack::IP.edit '127.0.0.1', '127.0.0.2'
       ip.should be_a Hash
-      pp ip
     end
   end
 
