@@ -1,5 +1,7 @@
 # FannyPack
 
+[![Build Status](http://travis-ci.org/site5/fanny_pack.png)](http://travis-ci.org/site5/fanny_pack)
+
 FannyPack is a Ruby library for working with the
 [Fantastico API](https://netenberg.com/api/).
 
