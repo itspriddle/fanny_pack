@@ -1,2 +1,2 @@
 --no-private
---exclude /lib/fanny_pack/errors.rb
+--exclude lib/fanny_pack/errors.rb
