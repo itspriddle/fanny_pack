@@ -22,5 +22,9 @@ module FannyPack
       end
       Request.new.commit cmd, :listType => list_type
     end
+
+    def self.delete(ip)
+      Request.new.commit :deleteIp, :ip => ip
+    end
   end
 end

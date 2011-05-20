@@ -73,4 +73,18 @@ describe FannyPack::IP do
       end
     end
   end
+
+  describe "::delete" do
+    it "raises ArgumentError without IP" do
+      expect { FannyPack::IP.delete }.to raise_error(ArgumentError)
+    end
+
+    it "deletes the IP" do
+      load_fixture :delete
+      ip = FannyPack::IP.delete '127.0.0.1'
+      ip.should be_a Hash
+      ip.should have_key 'deleted'
+      ip.should have_key 'ip'
+    end
+  end
 end
