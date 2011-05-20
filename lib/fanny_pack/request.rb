@@ -36,7 +36,7 @@ module FannyPack
       hash = Crack::XML.parse(data)
       res  = find_key_in_hash(hash, 'item')
       case @action.to_sym
-      when :editIp, :addIp, :deleteIp, :reactivateIp
+      when :editIp, :addIp, :deleteIp, :reactivateIp, :deactivateIp
         Hash[res.map { |r| [r['key'], r['value']] }]
       else
         res

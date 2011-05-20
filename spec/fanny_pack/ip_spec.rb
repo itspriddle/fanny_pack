@@ -88,17 +88,19 @@ describe FannyPack::IP do
     end
   end
 
-  describe "::reactivate" do
-    it "raises ArgumentError without IP" do
-      expect { FannyPack::IP.reactivate }.to raise_error(ArgumentError)
-    end
+  %w[reactivate deactivate].each do |method|
+    describe "::#{method}" do
+      it "raises ArgumentError without IP" do
+        expect { FannyPack::IP.send method }.to raise_error(ArgumentError)
+      end
 
-    it "reactivates the IP" do
-      load_fixture :reactivate
-      ip = FannyPack::IP.reactivate '127.0.0.1'
-      ip.should be_a Hash
-      %w[ipAddress addedOn isVPS status].each do |key|
-        ip.should have_key key
+      it "#{method}s the IP" do
+        load_fixture method
+        ip = FannyPack::IP.send method, '127.0.0.1'
+        ip.should be_a Hash
+        %w[ipAddress addedOn isVPS status].each do |key|
+          ip.should have_key key
+        end
       end
     end
   end
