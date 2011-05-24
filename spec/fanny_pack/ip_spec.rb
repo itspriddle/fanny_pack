@@ -21,7 +21,7 @@ describe FannyPack::IP do
 
   describe "::add" do
     it "raises ArgumentError without IP" do
-      requires_attr('ip') { FannyPack::IP.add }
+      requires_ip { FannyPack::IP.add }
     end
 
     it "returns a Hash" do
@@ -33,7 +33,7 @@ describe FannyPack::IP do
 
   describe "::edit" do
     it "raises ArgumentError without IP" do
-      requires_attr('ip') { FannyPack::IP.edit }
+      requires_ip { FannyPack::IP.edit }
     end
 
     it "edits the IP" do
@@ -45,7 +45,7 @@ describe FannyPack::IP do
 
   describe "::list" do
     it "raises ArgumentError without type" do
-      requires_attr('ip') { FannyPack::IP.list }
+      requires_ip { FannyPack::IP.list }
     end
 
     it "raises error with invalid type" do
@@ -77,7 +77,7 @@ describe FannyPack::IP do
 
   describe "::delete" do
     it "raises ArgumentError without IP" do
-      requires_attr('ip') { FannyPack::IP.delete }
+      requires_ip { FannyPack::IP.delete }
     end
 
     it "deletes the IP" do
@@ -92,7 +92,7 @@ describe FannyPack::IP do
   %w[reactivate deactivate].each do |method|
     describe "::#{method}" do
       it "raises ArgumentError without IP" do
-        requires_attr('ip') { FannyPack::IP.send(method) }
+        requires_ip { FannyPack::IP.send(method) }
       end
 
       it "#{method}s the IP" do
@@ -108,7 +108,7 @@ describe FannyPack::IP do
 
   describe "::details" do
     it "raises ArgumentError without IP" do
-      requires_attr('ip') { FannyPack::IP.details }
+      requires_ip { FannyPack::IP.details }
     end
 
     it "returns a hash of IP details" do
