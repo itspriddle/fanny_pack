@@ -15,3 +15,7 @@ def register_url(body)
   FakeWeb.allow_net_connect = false
   FakeWeb.register_uri :any, FannyPack::Request::API_URL, :body => body
 end
+
+def requires_attr(attr, &block)
+  expect { block.call }.to raise_error(ArgumentError)
+end
