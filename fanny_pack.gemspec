@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'crack', '~> 0.1.8'
   s.add_runtime_dependency('jruby-openssl', '~> 0.7.4') if RUBY_PLATFORM == 'java'
 
-  s.add_development_dependency 'rspec', '~> 2.5.0'
+  s.add_development_dependency 'rspec', '~> 2.6.0'
   s.add_development_dependency 'fakeweb', '~> 1.3.0'
   s.add_development_dependency 'awesome_print', '~> 0.4.0'
 
