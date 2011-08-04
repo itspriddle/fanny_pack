@@ -2,6 +2,9 @@
 
 FannyPack is a Ruby library for working with the [Fantastico API][].
 
+FannyPack has been tested on on MRI 1.8.7, MRI 1.9.2, MRI 1.9.3 Preview 1, 
+Rubinius 2.0.0pre, and JRuby 1.6.2.
+
 [Build Status]: http://travis-ci.org/site5/fanny_pack
 [Build Icon]: https://secure.travis-ci.org/site5/fanny_pack.png?branch=master
 [Fantastico API]: https://netenberg.com/api/
