@@ -17,18 +17,13 @@ Gem::Specification.new do |s|
   s.files    += Dir['spec/**/*']
 
   s.add_runtime_dependency 'builder', '~> 3.0.0'
-  s.add_runtime_dependency 'crack', '~> 0.1.8'
+  s.add_runtime_dependency 'crack', '~> 0.3.1'
   s.add_runtime_dependency('jruby-openssl', '~> 0.7.4') if RUBY_PLATFORM == 'java'
 
-  s.add_development_dependency 'rake', '~> 0.8.7'
-  s.add_development_dependency 'rspec', '~> 2.6.0'
+  s.add_development_dependency 'rake', '~> 0.9.2.2'
+  s.add_development_dependency 'rspec', '~> 2.8.0'
   s.add_development_dependency 'fakeweb', '~> 1.3.0'
-  s.add_development_dependency 'awesome_print', '~> 0.4.0'
-
-  if ! defined?(RUBY_ENGINE) || RUBY_ENGINE != 'rbx'
-    s.add_development_dependency 'rcov', '~> 0.9'
-    s.add_development_dependency 'metric_fu', '~> 2.1'
-  end
+  s.add_development_dependency 'awesome_print', '~> 1.0.2'
 
   s.extra_rdoc_files = ['README.markdown']
   s.rdoc_options     = ["--charset=UTF-8"]
