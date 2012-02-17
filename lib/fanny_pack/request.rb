@@ -1,5 +1,5 @@
 require 'builder'
-require 'crack'
+require 'crack/xml'
 require 'open-uri'
 require 'net/https'
 
