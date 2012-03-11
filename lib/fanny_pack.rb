@@ -1,8 +1,13 @@
+require 'faraday'
+require 'faraday_middleware'
+require 'fanny_pack/middleware/fantastico'
+require 'multi_xml'
+
 module FannyPack
-  autoload :Version, 'fanny_pack/version'
-  autoload :Errors,  'fanny_pack/errors'
-  autoload :Request, 'fanny_pack/request'
-  autoload :IP,      'fanny_pack/ip'
+  autoload :Version,               'fanny_pack/version'
+  autoload :Errors,                'fanny_pack/errors'
+  autoload :Request,               'fanny_pack/request'
+  autoload :IP,                    'fanny_pack/ip'
 
   class << self
     # Your Fantastico account hash, used for API authentication

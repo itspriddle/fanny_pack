@@ -1,7 +1,5 @@
-require 'builder'
-require 'crack/xml'
-require 'open-uri'
-require 'net/https'
+Faraday.register_middleware :request, :fantastico_xml_builder => FannyPack::FantasticoXMLBuilder
+Faraday.register_middleware :response, :fantastico_parser => FannyPack::FantasticoParser
 
 module FannyPack
   # FannyPack::Request handles forming the XML request to be sent to the
@@ -49,36 +47,18 @@ module FannyPack
       end
       @action = action
       @params = params
-
-      uri = URI.parse(API_URL)
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      res = http.post(uri.path, to_xml, 'Content-Type' => 'text/xml; charset=utf-8')
-      parse(res.body)
-    end
-
-    # Parse the XML response from Fantastico
-    #
-    # Returns an Array or Hash depending on the API method called
-    #
-    # @param [String] data
-    #   The XML response from Fantastico
-    #
-    # @return [Hash, Array]
-    def parse(data)
-      res = find_key_in_hash(Crack::XML.parse(data), 'item')
-      if @action.to_sym == :getIpListDetailed
-        res.map! do |r|
-          Hash[r['item'].map { |i| [i['key'], i['value']] }]
-        end
-      elsif @action.to_sym == :getIpList
-        res
-      else
-        res = Hash[res.map { |r| [r['key'], r['value']] }] if res.is_a? Array
-      end
-
-      @success = ! res.has_key?("faultcode") if res.respond_to?(:has_key?)
-      res
+      
+      response = Faraday.new(:url => API_URL) do |c|
+        c.headers = {'Content-Type' => 'text/xml; charset=utf-8'}
+        c.request :fantastico_xml_builder, @action, @params, FannyPack.account_hash
+        c.response :fantastico_parser, @action
+        c.response :xml
+        c.adapter :net_http
+      end.post.body
+      
+      @success = !(response.is_a?(Hash) && response.has_key?("faultcode"))
+      
+      response
     end
 
     # Returns true if a commit was successful
@@ -86,48 +66,6 @@ module FannyPack
     # @return [Boolean]
     def success?
       @success
-    end
-
-    # Builds the SOAP Envelope to be sent to Fantastico for this request
-    #
-    # @return [String]
-    def to_xml
-      xml = Builder::XmlMarkup.new :indent => 2
-      xml.instruct!
-      xml.tag! 'env:Envelope', 'xmlns:env' => 'http://schemas.xmlsoap.org/soap/envelope/' do
-        xml.tag! 'env:Body' do
-          xml.tag! @action do
-            xml.tag! 'accountHASH', FannyPack.account_hash
-            @params.each do |key, val|
-              xml.tag! key, val
-            end
-          end
-        end
-      end
-      xml.target!
-    end
-
-  private
-
-    # Finds +index+ in +hash+ by searching recursively
-    #
-    # @param [Hash] hash
-    #   The hash to search
-    #
-    # @param index
-    #   The hash key to look for
-    def find_key_in_hash(hash, index)
-      hash.each do |key, val|
-        if val.respond_to? :has_key?
-          if val.has_key? index
-            return val[index]
-          else
-            return find_key_in_hash val, index
-          end
-        else
-          val
-        end
-      end
     end
 
   end
