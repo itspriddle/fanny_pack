@@ -1,3 +1,8 @@
+require 'faraday'
+require 'faraday_middleware'
+require 'fanny_pack/middleware/fantastico'
+require 'multi_xml'
+
 module FannyPack
   autoload :Version, 'fanny_pack/version'
   autoload :Errors,  'fanny_pack/errors'
