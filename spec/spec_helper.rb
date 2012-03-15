@@ -3,10 +3,6 @@ require 'fakeweb'
 require 'vcr'
 require 'fanny_pack'
 
-def load_fixture(name)
-  File.read File.expand_path("../fixtures/#{name}.txt", __FILE__)
-end
-
 def requires_ip(&block)
   expect { block.call }.to raise_error(ArgumentError)
 end
