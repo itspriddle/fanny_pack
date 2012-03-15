@@ -1,5 +1,4 @@
 require 'rspec'
-require 'fakeweb'
 require 'vcr'
 require 'fanny_pack'
 
