@@ -20,30 +20,33 @@ describe FannyPack::IP do
   end
 
   describe "::add" do
+    use_vcr_cassette "ip/add"
+      
     it "raises ArgumentError without IP" do
       requires_ip { FannyPack::IP.add }
     end
 
     it "returns a Hash" do
-      load_fixture :add
       ip = FannyPack::IP.add '127.0.0.1'
       ip.should be_a Hash
     end
   end
 
   describe "::edit" do
+    use_vcr_cassette "ip/edit"
     it "raises ArgumentError without IP" do
       requires_ip { FannyPack::IP.edit }
     end
 
     it "edits the IP" do
-      load_fixture :edit
       ip = FannyPack::IP.edit '127.0.0.1', '127.0.0.2'
       ip.should be_a Hash
     end
   end
 
   describe "::list" do
+    use_vcr_cassette "ip/list"
+    
     it "raises ArgumentError without type" do
       requires_ip { FannyPack::IP.list }
     end
@@ -53,7 +56,6 @@ describe FannyPack::IP do
     end
 
     it "returns an array of IPs" do
-      load_fixture :list
       ip = FannyPack::IP.list :all
       ip.should be_a Array
       ip.should have(2).items
@@ -61,27 +63,33 @@ describe FannyPack::IP do
       ip[1].should == '127.0.0.2'
     end
 
-    it "returns an array of Hashes if details is true" do
-      load_fixture :list_details
-      ip = FannyPack::IP.list :all, true
-      ip.should be_a Array
-      ip.should have(2).items
-      ip.each do |hash|
-        hash.should be_a Hash
-        %w[ipAddress addedOn isVPS status].each do |key|
-          hash.should have_key key
+    context "if details is true" do
+
+      use_vcr_cassette "ip/list_details"
+      
+      it "returns an array of Hashes if details is true" do
+        ip = FannyPack::IP.list :all, true
+        ip.should be_a Array
+        ip.should have(2).items
+        ip.each do |hash|
+          hash.should be_a Hash
+          %w[ipAddress addedOn isVPS status].each do |key|
+            hash.should have_key key
+          end
         end
       end
+      
     end
   end
 
   describe "::delete" do
+    use_vcr_cassette "ip/delete"
+    
     it "raises ArgumentError without IP" do
       requires_ip { FannyPack::IP.delete }
     end
 
     it "deletes the IP" do
-      load_fixture :delete
       ip = FannyPack::IP.delete '127.0.0.1'
       ip.should be_a Hash
       ip.should have_key 'deleted'
@@ -91,12 +99,12 @@ describe FannyPack::IP do
 
   %w[reactivate deactivate].each do |method|
     describe "::#{method}" do
+      use_vcr_cassette "ip/#{method}"
       it "raises ArgumentError without IP" do
         requires_ip { FannyPack::IP.send(method) }
       end
 
       it "#{method}s the IP" do
-        load_fixture method
         ip = FannyPack::IP.send method, '127.0.0.1'
         ip.should be_a Hash
         %w[ipAddress addedOn isVPS status].each do |key|
@@ -107,12 +115,13 @@ describe FannyPack::IP do
   end
 
   describe "::details" do
+    use_vcr_cassette "ip/details"
+    
     it "raises ArgumentError without IP" do
       requires_ip { FannyPack::IP.details }
     end
 
     it "returns a hash of IP details" do
-      load_fixture :details
       ip = FannyPack::IP.details '127.0.0.1'
       ip.should be_a Hash
       %w[ipAddress addedOn isVPS status].each do |key|

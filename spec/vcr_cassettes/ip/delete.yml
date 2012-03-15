@@ -1,0 +1,19 @@
+--- 
+http_interactions: 
+- request: 
+    method: post
+    uri: https://netenberg.com/api/server.php 
+    body: 
+      encoding: UTF-8
+      string: ""
+    headers: {}
+  response: 
+    status: 
+      code: 200
+      message: OK
+    body: 
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:xmethods-delayed-quotes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/xml-soap" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:deleteIpResponse><Result xsi:type="ns2:Map">  <item><key xsi:type="xsd:string">ip</key><value xsi:type="xsd:string">127.0.0.1</value></item>  <item><key xsi:type="xsd:string">deleted</key><value xsi:type="xsd:string">Yes</value></item></Result></ns1:deleteIpResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+    http_version: "1.1"
+  recorded_at: Tue, 01 Nov 2011 04:58:44 GMT
+recorded_with: VCR 2.0.0
