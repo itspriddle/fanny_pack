@@ -7,7 +7,7 @@ describe FannyPack::FantasticoXMLBuilder do
     env = {:body => nil, :request_headers => Faraday::Utils::Headers.new}
     result = middleware.call(env)
     xml = result[:body]
-    xml.should include %{<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">\n  <env:Body>}
+    xml.should include %{<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body>}
   end
 
 end
