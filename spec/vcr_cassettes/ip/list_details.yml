@@ -3,9 +3,7 @@ http_interactions:
 - request: 
     method: post
     uri: https://netenberg.com/api/server.php 
-    body: 
-      encoding: UTF-8
-      string: ""
+    body: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><getIpListDetailed><accountHASH>hash</accountHASH><listType>0</listType></getIpListDetailed></env:Body></env:Envelope>
     headers: {}
   response: 
     status: 
