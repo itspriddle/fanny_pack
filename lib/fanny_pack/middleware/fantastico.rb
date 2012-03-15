@@ -20,7 +20,7 @@ module FannyPack
     #
     # @return [String]
     def to_xml
-      xml = Builder::XmlMarkup.new :indent => 2
+      xml = Builder::XmlMarkup.new
       xml.instruct!
       xml.tag! 'env:Envelope', 'xmlns:env' => 'http://schemas.xmlsoap.org/soap/envelope/' do
         xml.tag! 'env:Body' do

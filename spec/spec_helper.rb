@@ -13,5 +13,5 @@ end
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'
   c.hook_into :fakeweb
-  c.default_cassette_options = {:record => :none}
+  c.default_cassette_options = {:record => :none, :match_requests_on => [:body]}
 end
