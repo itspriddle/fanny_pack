@@ -1,0 +1,19 @@
+--- 
+http_interactions: 
+- request: 
+    method: post
+    uri: https://netenberg.com/api/server.php 
+    body: 
+      encoding: UTF-8
+      string: ""
+    headers: {}
+  response: 
+    status: 
+      code: 200
+      message: OK
+    body: 
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:xmethods-delayed-quotes" xmlns:ns2="http://xml.apache.org/xml-soap" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:getIpListDetailedResponse><Result SOAP-ENC:arrayType="ns2:Map[1]" xsi:type="SOAP-ENC:Array"><item xsi:type="ns2:Map">  <item><key xsi:type="xsd:string">ipAddress</key><value xsi:type="xsd:string">127.0.0.1</value></item>  <item><key xsi:type="xsd:string">addedOn</key><value xsi:type="xsd:string">2011-05-19 14:23:57</value></item>  <item><key xsi:type="xsd:string">isVPS</key><value xsi:type="xsd:string">Yes</value></item>  <item><key xsi:type="xsd:string">status</key><value xsi:type="xsd:string">Active</value></item></item><item xsi:type="ns2:Map">  <item><key xsi:type="xsd:string">ipAddress</key><value xsi:type="xsd:string">127.0.0.2</value></item>  <item><key xsi:type="xsd:string">addedOn</key><value xsi:type="xsd:string">2011-05-19 14:23:57</value></item>  <item><key xsi:type="xsd:string">isVPS</key><value xsi:type="xsd:string">No</value></item>  <item><key xsi:type="xsd:string">status</key><value xsi:type="xsd:string">Active</value></item></item></Result></ns1:getIpListDetailedResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+    http_version: "1.1"
+  recorded_at: Tue, 01 Nov 2011 04:58:44 GMT
+recorded_with: VCR 2.0.0

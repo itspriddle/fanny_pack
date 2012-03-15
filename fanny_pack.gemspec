@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '~> 2.8.0'
   s.add_development_dependency 'fakeweb', '~> 1.3.0'
   s.add_development_dependency 'awesome_print', '~> 1.0.2'
+  s.add_development_dependency 'vcr', '~> 2.0.0'
 
   s.extra_rdoc_files = ['README.markdown']
   s.rdoc_options     = ["--charset=UTF-8"]
