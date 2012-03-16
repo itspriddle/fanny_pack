@@ -7,7 +7,7 @@ describe FannyPack::FantasticoXMLBuilder do
     env = {:body => nil, :request_headers => Faraday::Utils::Headers.new}
     result = middleware.call(env)
     xml = result[:body]
-    xml.should include %{<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">\n  <env:Body>}
+    xml.should include %{<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body>}
   end
 
 end
@@ -15,7 +15,7 @@ end
 describe FannyPack::FantasticoParser do
 
   it "returns an Array of Hashes if @action == :getIpListDetailed" do
-    response_xml = YAML.load_file("spec/vcr_cassettes/ip/list_details.yml")["http_interactions"].first["response"]["body"]["string"]
+    response_xml = YAML.load_file("spec/vcr_cassettes/ip/list.yml")["http_interactions"].last["response"]["body"]["string"]
     env = { :body => MultiXml.parse(response_xml) }
     middleware = described_class.new(lambda{|env| env}, :getIpListDetailed)
     res = middleware.on_complete(env)

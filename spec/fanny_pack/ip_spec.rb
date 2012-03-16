@@ -62,24 +62,19 @@ describe FannyPack::IP do
       ip[0].should == '127.0.0.1'
       ip[1].should == '127.0.0.2'
     end
-
-    context "if details is true" do
-
-      use_vcr_cassette "ip/list_details"
       
-      it "returns an array of Hashes if details is true" do
-        ip = FannyPack::IP.list :all, true
-        ip.should be_a Array
-        ip.should have(2).items
-        ip.each do |hash|
-          hash.should be_a Hash
-          %w[ipAddress addedOn isVPS status].each do |key|
-            hash.should have_key key
-          end
+    it "returns an array of Hashes if details is true" do
+      ip = FannyPack::IP.list :all, true
+      ip.should be_a Array
+      ip.should have(2).items
+      ip.each do |hash|
+        hash.should be_a Hash
+        %w[ipAddress addedOn isVPS status].each do |key|
+          hash.should have_key key
         end
       end
-      
     end
+
   end
 
   describe "::delete" do
