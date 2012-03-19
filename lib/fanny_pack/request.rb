@@ -1,5 +1,5 @@
-Faraday.register_middleware :request, :fantastico_xml_builder => FannyPack::FantasticoXMLBuilder
-Faraday.register_middleware :response, :fantastico_parser => FannyPack::FantasticoParser
+require 'faraday'
+require 'malcolm'
 
 module FannyPack
   # FannyPack::Request handles forming the XML request to be sent to the
@@ -48,13 +48,18 @@ module FannyPack
       @action = action
       @params = params
       
-      response = Faraday.new(:url => API_URL) do |c|
-        c.headers = {'Content-Type' => 'text/xml; charset=utf-8'}
-        c.request :fantastico_xml_builder, @action, @params, FannyPack.account_hash
-        c.response :fantastico_parser, @action
-        c.response :xml
+      conn = Faraday.new(:url => API_URL) do |c|
+        c.request :soap
+        c.response :soap, "item"
         c.adapter :net_http
-      end.post.body
+      end
+      
+      request = conn.post do |r|
+        r.body = {@action => {'accountHASH' => FannyPack.account_hash}.merge(@params)}
+        r.headers = {'Content-Type' => 'text/xml; charset=utf-8'}
+      end
+      
+      response = request.body
       
       @success = !(response.is_a?(Hash) && response.has_key?("faultcode"))
       

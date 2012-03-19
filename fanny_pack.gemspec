@@ -18,8 +18,9 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'builder', '~> 3.0.0'
   s.add_runtime_dependency 'faraday', '~> 0.8.0rc'
-  s.add_runtime_dependency 'faraday_middleware', '~> 0.8.4'
-  s.add_runtime_dependency 'multi_xml'
+  s.add_runtime_dependency 'malcolm', '~> 0.0.2'
+  s.add_runtime_dependency 'nori', '~> 1.1.0'
+  s.add_runtime_dependency 'xml-simple', '~> 1.1.1'
   s.add_runtime_dependency('jruby-openssl', '~> 0.7.4') if RUBY_PLATFORM == 'java'
 
   s.add_development_dependency 'rake', '~> 0.9.2.2'

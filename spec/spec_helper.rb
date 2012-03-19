@@ -3,6 +3,8 @@ require 'vcr'
 require 'vcr_patch'
 require 'fanny_pack'
 
+FannyPack.account_hash = "test"
+
 def requires_ip(&block)
   expect { block.call }.to raise_error(ArgumentError)
 end
