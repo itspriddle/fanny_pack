@@ -55,7 +55,7 @@ module FannyPack
       end
       
       request = conn.post do |r|
-        r.body = {@action => {'accountHASH' => FannyPack.account_hash}.merge(@params)}
+        r.body = format_params_for_fantastico
         r.headers = {'Content-Type' => 'text/xml; charset=utf-8'}
       end
       
@@ -72,6 +72,17 @@ module FannyPack
     def success?
       @success
     end
+    
+  private
+  
+  # Wraps each param value in array so XmlSimple interprets them as child elements rather than attributes 
+  def format_params_for_fantastico
+    params = @params.inject({}) do |result, (k, v)|
+      result[k] = [v]
+      result
+    end
+    {@action => {'accountHASH' => [FannyPack.account_hash]}.merge(params)}
+  end
 
   end
 end
