@@ -2,6 +2,7 @@ require 'rspec'
 require 'vcr'
 require 'vcr_patch'
 require 'fanny_pack'
+require 'xmlsimple'
 
 FannyPack.account_hash = "test"
 
@@ -18,6 +19,6 @@ VCR.configure do |c|
   c.hook_into :fakeweb
   c.default_cassette_options = {:record => :none, :match_requests_on => [:xml_body_without_order]}
   c.register_request_matcher :xml_body_without_order do |request1, request2|
-    MultiXml.parse(request1.body) == MultiXml.parse(request2.body)
+    XmlSimple.xml_in(request1.body) == XmlSimple.xml_in(request2.body)
   end
 end
