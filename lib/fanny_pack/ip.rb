@@ -85,7 +85,18 @@ module FannyPack
       unless IP_TYPES.keys.include? list_type
         raise ArgumentError, "Invalid list type"
       end
-      Request.new.commit cmd, :listType => IP_TYPES[list_type]
+      response = Request.new.commit cmd, :listType => IP_TYPES[list_type]
+      if details
+        items = response[:item].map{|i| i[:item] }
+        items.map do |item|
+          item.inject({}) do |result, pair|
+            result[pair[:key]] = pair[:value]
+            result
+          end
+        end
+      else
+        response[:item]
+      end
     end
 
     # Delete an IP address from your Fantastico Account
@@ -98,7 +109,11 @@ module FannyPack
     # @example
     #   FannyPack::IP.delete '127.0.0.1'
     def self.delete(ip)
-      Request.new.commit :deleteIp, :ip => ip
+      response = Request.new.commit :deleteIp, :ip => ip
+      response[:item].inject({}) do |result, pair|
+        result[pair[:key]] = pair[:value]
+        result
+      end
     end
 
     # Reactivate a deactivated IP address
@@ -111,7 +126,11 @@ module FannyPack
     # @example
     #   FannyPack::IP.reactivate '127.0.0.1'
     def self.reactivate(ip)
-      Request.new.commit :reactivateIp, :ip => ip
+      response = Request.new.commit :reactivateIp, :ip => ip
+      response[:item].inject({}) do |result, pair|
+        result[pair[:key]] = pair[:value]
+        result
+      end
     end
 
     # Deactivate an IP address
@@ -124,7 +143,11 @@ module FannyPack
     # @example
     #   FannyPack::IP.deactivate '127.0.0.1'
     def self.deactivate(ip)
-      Request.new.commit :deactivateIp, :ip => ip
+      response = Request.new.commit :deactivateIp, :ip => ip
+      response[:item].inject({}) do |result, pair|
+        result[pair[:key]] = pair[:value]
+        result
+      end
     end
 
     # Get details for an IP address
@@ -137,7 +160,11 @@ module FannyPack
     # @example
     #   FannyPack::IP.details '127.0.0.1'
     def self.details(ip)
-      Request.new.commit :getIpDetails, :ip => ip
+      response = Request.new.commit :getIpDetails, :ip => ip
+      response[:item].inject({}) do |result, pair|
+        result[pair[:key]] = pair[:value]
+        result
+      end
     end
   end
 end
