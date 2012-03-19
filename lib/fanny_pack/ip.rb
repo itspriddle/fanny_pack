@@ -88,12 +88,7 @@ module FannyPack
       response = Request.new.commit cmd, :listType => IP_TYPES[list_type]
       if details
         items = response[:item].map{|i| i[:item] }
-        items.map do |item|
-          item.inject({}) do |result, pair|
-            result[pair[:key]] = pair[:value]
-            result
-          end
-        end
+        items.map { |item| attr_array_to_hash(item) end
       else
         response[:item]
       end
@@ -110,10 +105,7 @@ module FannyPack
     #   FannyPack::IP.delete '127.0.0.1'
     def self.delete(ip)
       response = Request.new.commit :deleteIp, :ip => ip
-      response[:item].inject({}) do |result, pair|
-        result[pair[:key]] = pair[:value]
-        result
-      end
+      attr_array_to_hash(response[:item])
     end
 
     # Reactivate a deactivated IP address
@@ -127,10 +119,7 @@ module FannyPack
     #   FannyPack::IP.reactivate '127.0.0.1'
     def self.reactivate(ip)
       response = Request.new.commit :reactivateIp, :ip => ip
-      response[:item].inject({}) do |result, pair|
-        result[pair[:key]] = pair[:value]
-        result
-      end
+      attr_array_to_hash(response[:item])
     end
 
     # Deactivate an IP address
@@ -144,10 +133,7 @@ module FannyPack
     #   FannyPack::IP.deactivate '127.0.0.1'
     def self.deactivate(ip)
       response = Request.new.commit :deactivateIp, :ip => ip
-      response[:item].inject({}) do |result, pair|
-        result[pair[:key]] = pair[:value]
-        result
-      end
+      attr_array_to_hash(response[:item])
     end
 
     # Get details for an IP address
@@ -161,10 +147,17 @@ module FannyPack
     #   FannyPack::IP.details '127.0.0.1'
     def self.details(ip)
       response = Request.new.commit :getIpDetails, :ip => ip
-      response[:item].inject({}) do |result, pair|
+      attr_array_to_hash(response[:item])
+    end
+    
+  private
+    
+    def self.attr_array_to_hash(array)
+      array.inject({}) do |result, pair|
         result[pair[:key]] = pair[:value]
         result
       end
     end
+    
   end
 end
