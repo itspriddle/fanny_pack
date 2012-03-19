@@ -88,7 +88,7 @@ module FannyPack
       response = Request.new.commit cmd, :listType => IP_TYPES[list_type]
       if details
         items = response[:item].map{|i| i[:item] }
-        items.map { |item| attr_array_to_hash(item) end
+        items.map { |item| attr_array_to_hash(item) }
       else
         response[:item]
       end
