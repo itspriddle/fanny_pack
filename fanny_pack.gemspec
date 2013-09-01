@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files    += Dir['lib/**/*']
   s.files    += Dir['spec/**/*']
 
-  s.add_runtime_dependency 'builder', '~> 3.0.0'
+  s.add_runtime_dependency 'builder', '>= 3.0.0'
   s.add_runtime_dependency 'faraday', '~> 0.8.1'
   s.add_runtime_dependency 'malcolm', '~> 0.0.2'
   s.add_runtime_dependency 'nori', '~> 1.1.0'
